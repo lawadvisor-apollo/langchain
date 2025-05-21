@@ -116,7 +116,7 @@ defmodule LangChain.ChatModels.ChatAnthropic do
     # Configuration for AWS Bedrock. Configure this instead of endpoint & api_key if you want to use Bedrock.
     embeds_one :bedrock, BedrockConfig
 
-    # Configuration for Google Vertex. Configure this instead of endpoint & api_key if you want to use Bedrock.
+    # Configuration for Google Vertex. Configure this instead of endpoint & api_key if you want to use Vertex.
     embeds_one :vertex, VertexConfig
 
     # API key for Anthropic. If not set, will use global api key. Allows for usage
