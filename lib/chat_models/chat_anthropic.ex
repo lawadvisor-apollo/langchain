@@ -575,7 +575,7 @@ defmodule LangChain.ChatModels.ChatAnthropic do
   end
 
   defp url(%ChatAnthropic{vertex: %VertexConfig{} = vertex, stream: stream} = anthropic) do
-    VertexConfig.url(vertex, model: anthropic.model, stream: stream) |> IO.inspect()
+    VertexConfig.url(vertex, model: anthropic.model, stream: stream)
   end
 
   # Parse a new message response
@@ -952,6 +952,17 @@ defmodule LangChain.ChatModels.ChatAnthropic do
         setting = if setting == true, do: @default_cache_control_block, else: setting
         %{"type" => "text", "text" => part.content, "cache_control" => setting}
     end
+  end
+
+  def for_api(%ContentPart{type: :file} = part) do
+    %{
+      "type" => "document",
+      "source" => %{
+        "type" => "base64",
+        "data" => part.content,
+        "media_type" => "application/pdf"
+      }
+    }
   end
 
   def for_api(%ContentPart{type: :image} = part) do
